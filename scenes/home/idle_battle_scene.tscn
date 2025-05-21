@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3sy80gyp5vce"]
+
+[ext_resource type="Script" uid="uid://5k4xwlukrdwt" path="res://scenes/home/idle_battle_scene.gd" id="1_k0ssi"]
+[ext_resource type="PackedScene" uid="uid://c2g6xc4rlc2jo" path="res://core/camera/main_camera.tscn" id="3_rro0y"]
+[ext_resource type="PackedScene" uid="uid://1wbv33vd5l6x" path="res://scenes/Spawner/spawner.tscn" id="3_uw4sf"]
+[ext_resource type="Script" uid="uid://28vhrllm3313" path="res://scenes/home/grid_manager.gd" id="4_uw4sf"]
+
+[sub_resource type="TileSet" id="TileSet_rro0y"]
+tile_size = Vector2i(64, 64)
+
+[sub_resource type="GDScript" id="GDScript_uw4sf"]
+script/source = "extends Node2D
+
+@export var grid_manager: GridManager
+@export var icon_path: String = \"res://icon.svg\"
+@export var tile_size: int = 64
+
+var marker_nodes: Dictionary = {}
+
+func _ready() -> void: 
+	grid_manager = get_parent()
+
+func _process(_delta: float) -> void:
+	if grid_manager == null:
+		return
+
+	# Entferne Marker, die nicht mehr benötigt werden
+	for tile in marker_nodes.keys():
+		if not grid_manager.occupied_by_enemy.has(tile):
+			marker_nodes[tile].queue_free()
+			marker_nodes.erase(tile)
+
+	# Füge neue Marker hinzu
+	for tile in grid_manager.occupied_by_enemy.keys():
+		if not marker_nodes.has(tile):
+			var marker := Sprite2D.new()
+			marker.texture = load(icon_path)
+			marker.scale = Vector2(tile_size, tile_size) / marker.texture.get_size()
+			marker.position = grid_manager.grid_to_world(tile)
+			marker.z_index = 1000  # Ganz oben
+			marker.modulate.a = 0.2
+			add_child(marker)
+			marker_nodes[tile] = marker
+"
+
+[node name="IdleBattleScene" type="Node2D"]
+script = ExtResource("1_k0ssi")
+
+[node name="GridManager" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_rro0y")
+script = ExtResource("4_uw4sf")
+blocked_tiles = Array[Vector2i]([Vector2i(0, 0)])
+
+[node name="DebugArrows" type="Node2D" parent="GridManager"]
+
+[node name="Spawners" type="Node2D" parent="GridManager"]
+
+[node name="Spawner" parent="GridManager/Spawners" instance=ExtResource("3_uw4sf")]
+position = Vector2(576, 352)
+
+[node name="TileDebug" type="Node2D" parent="GridManager"]
+script = SubResource("GDScript_uw4sf")
+
+[node name="Camera2D" parent="." instance=ExtResource("3_rro0y")]
+position_smoothing_enabled = true
+speed = 1000.0

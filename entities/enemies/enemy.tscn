@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://o78tfoxi27wp"]
+
+[ext_resource type="Script" uid="uid://cgtjbpyepdb0l" path="res://entities/enemies/enemy.gd" id="1_owq46"]
+[ext_resource type="Resource" uid="uid://tment0h1koho" path="res://data/enemies/000 starting zone/sheep.tres" id="2_wqcwe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8edke"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wqcwe"]
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_owq46")
+data = ExtResource("2_wqcwe")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8edke")
+animation = &"die"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wqcwe")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://1wbv33vd5l6x"]
+
+[ext_resource type="Script" uid="uid://banwrhebyo80l" path="res://scenes/Spawner/spawner.gd" id="1_u111k"]
+[ext_resource type="Texture2D" uid="uid://c6dus1i6p04pv" path="res://assets/Placeholder/debug/Arrow.png" id="2_ry2kq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry2kq"]
+
+[node name="Spawner" type="Area2D"]
+script = ExtResource("1_u111k")
+
+[node name="WandererTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 0.516
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.196078, 1, 1)
+texture = ExtResource("2_ry2kq")
+
+[node name="DragNDropCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ry2kq")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="WandererTimer" to="." method="_on_wanderer_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

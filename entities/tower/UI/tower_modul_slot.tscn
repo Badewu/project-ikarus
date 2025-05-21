@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://w1f8inrujic2"]
+
+[ext_resource type="Script" uid="uid://g1pwcql67lsg" path="res://entities/tower/UI/tower_modul_slot.gd" id="1_42mp3"]
+
+[node name="TowerModulSlot" type="TextureButton"]
+ignore_texture_size = true
+script = ExtResource("1_42mp3")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

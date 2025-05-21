@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=28 format=3 uid="uid://tment0h1koho"]
+
+[ext_resource type="Texture2D" uid="uid://drgh6uxhvi711" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile012.png" id="1_h4v3q"]
+[ext_resource type="Script" uid="uid://byjfq33t4rt46" path="res://data/types/enemy_data.gd" id="1_unjxq"]
+[ext_resource type="PackedScene" uid="uid://dtl30jda84k33" path="res://entities/movement/straight_movement.tscn" id="1_wjfkg"]
+[ext_resource type="Texture2D" uid="uid://cv4yddu7s1sh1" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile013.png" id="2_2507j"]
+[ext_resource type="Script" uid="uid://cgxp5c68hx1xg" path="res://data/types/element_set.gd" id="2_bvu6d"]
+[ext_resource type="Texture2D" uid="uid://br5otco28tbrp" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile014.png" id="3_hd7n8"]
+[ext_resource type="Texture2D" uid="uid://cdeb2vyd58o51" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile015.png" id="4_cdlsq"]
+[ext_resource type="Texture2D" uid="uid://cu3kjxfknbgrr" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile016.png" id="5_t1hvn"]
+[ext_resource type="Texture2D" uid="uid://nvekj7lyxh6n" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile017.png" id="6_786k2"]
+[ext_resource type="Texture2D" uid="uid://bsmi7h005s8md" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile018.png" id="7_gcpir"]
+[ext_resource type="Texture2D" uid="uid://b484fxww2uw3q" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile019.png" id="8_7nvsy"]
+[ext_resource type="Texture2D" uid="uid://dbcmjbw2qelws" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile020.png" id="9_yc0em"]
+[ext_resource type="Texture2D" uid="uid://b1koyg3ydbwwe" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile021.png" id="10_5edj0"]
+[ext_resource type="Texture2D" uid="uid://ctthts5b0ehaj" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile022.png" id="11_cqydy"]
+[ext_resource type="Texture2D" uid="uid://dmj51xu03ebqw" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile023.png" id="12_w4y3g"]
+[ext_resource type="Texture2D" uid="uid://c67lwbu0x7t52" path="res://assets/Placeholder/enemies/000 starting zone/sheep/idle/tile000.png" id="13_rbsn2"]
+[ext_resource type="Texture2D" uid="uid://b81dmaduetvov" path="res://assets/Placeholder/enemies/000 starting zone/sheep/idle/tile001.png" id="14_hycmr"]
+[ext_resource type="Texture2D" uid="uid://d1f3u1pst6e7b" path="res://assets/Placeholder/enemies/000 starting zone/sheep/idle/tile002.png" id="15_sxfed"]
+[ext_resource type="Texture2D" uid="uid://cwlepwqsxg517" path="res://assets/Placeholder/enemies/000 starting zone/sheep/idle/tile003.png" id="16_euj10"]
+[ext_resource type="Texture2D" uid="uid://c54vnbfyu4lnj" path="res://assets/Placeholder/enemies/000 starting zone/sheep/run/tile006.png" id="19_jauxb"]
+[ext_resource type="Texture2D" uid="uid://ctw8su6mckcev" path="res://assets/Placeholder/enemies/000 starting zone/sheep/run/tile007.png" id="20_y13dt"]
+[ext_resource type="Texture2D" uid="uid://ck3gdsdtqljd0" path="res://assets/Placeholder/enemies/000 starting zone/sheep/run/tile008.png" id="21_wy0x1"]
+[ext_resource type="Texture2D" uid="uid://gpyis807ep1t" path="res://assets/Placeholder/enemies/000 starting zone/sheep/run/tile009.png" id="22_foh13"]
+[ext_resource type="Texture2D" uid="uid://cl282f2k2ob7t" path="res://assets/Placeholder/enemies/000 starting zone/sheep/run/tile010.png" id="23_fpnt4"]
+[ext_resource type="Texture2D" uid="uid://gakxtyd64h01" path="res://assets/Placeholder/enemies/000 starting zone/sheep/run/tile011.png" id="24_vta44"]
+
+[sub_resource type="Resource" id="Resource_j310y"]
+script = ExtResource("2_bvu6d")
+fire = 1.0
+water = 1.0
+earth = 1.0
+air = 1.0
+ether = 1.0
+metadata/_custom_type_script = "uid://cgxp5c68hx1xg"
+
+[sub_resource type="Resource" id="Resource_bvu6d"]
+script = ExtResource("2_bvu6d")
+fire = 1.0
+water = 1.0
+earth = 1.0
+air = 1.0
+ether = 1.0
+metadata/_custom_type_script = "uid://cgxp5c68hx1xg"
+
+[resource]
+script = ExtResource("1_unjxq")
+name = "Sheep"
+idle_animation_frames = Array[Texture2D]([ExtResource("13_rbsn2"), ExtResource("14_hycmr"), ExtResource("15_sxfed"), ExtResource("16_euj10")])
+run_animation_frames = Array[Texture2D]([ExtResource("19_jauxb"), ExtResource("20_y13dt"), ExtResource("21_wy0x1"), ExtResource("22_foh13"), ExtResource("23_fpnt4"), ExtResource("24_vta44")])
+die_animation_frames = Array[Texture2D]([ExtResource("1_h4v3q"), ExtResource("2_2507j"), ExtResource("3_hd7n8"), ExtResource("4_cdlsq"), ExtResource("5_t1hvn"), ExtResource("6_786k2"), ExtResource("7_gcpir"), ExtResource("8_7nvsy"), ExtResource("9_yc0em"), ExtResource("10_5edj0"), ExtResource("11_cqydy"), ExtResource("12_w4y3g")])
+rank = 1
+level = 1
+experience = 0
+movement_speed = 50.0
+acceleration = 1.0
+movement_pattern = ExtResource("1_wjfkg")
+weapon_proficiency = 1.0
+weapon_element = SubResource("Resource_bvu6d")
+base_health = 0
+resistances = SubResource("Resource_j310y")
+metadata/_custom_type_script = "uid://byjfq33t4rt46"
