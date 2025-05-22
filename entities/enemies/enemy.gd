@@ -5,8 +5,12 @@ enum State {IDLE, MOVING, ATTACKING, DEAD}
 
 @export var data: EnemyData
 
+#Live Data
 var current_state: State = State.MOVING
 var is_alive: bool = true
+var current_health : float
+var max_health : float
+
 #REFERENCE
 var grid_manager : GridManager
 
@@ -20,7 +24,7 @@ func _ready() -> void:
 	set_movement()
 	set_rank()
 	set_collision()
-	
+	set_stats()
 
 func _process(delta: float) -> void:
 	if is_alive:
@@ -47,8 +51,29 @@ func _process(delta: float) -> void:
 		#current_state = State.DEAD
 
 
-func apply_damage():
-	pass
+func set_stats() -> void:
+	max_health = calculate_health_from_data()
+	current_health = max_health
+
+
+func calculate_health_from_data() -> float:
+	var health = data.base_health
+	#If no reasonable Health data is present
+	if health <= 0:
+		health = 50 * data.level
+	return health
+
+
+func apply_damage(amount : float):
+	current_health -= amount
+	
+	#Visual feedback
+	modulate = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color.WHITE
+	
+	if current_health <= 0:
+		current_state = State.DEAD
 
 
 func set_animation_frames():

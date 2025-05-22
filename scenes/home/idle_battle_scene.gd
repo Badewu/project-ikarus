@@ -1,7 +1,7 @@
 extends Node2D
 
 var test_enemy_path: String = "res://data/enemies/000 starting zone/sheep.tres"
-var tower_template = preload("res://scenes/tower/tower.tscn")
+var tower_template = preload("res://entities/tower/tower.tscn")
 var grid_manager : GridManager
 
 func _ready() -> void:

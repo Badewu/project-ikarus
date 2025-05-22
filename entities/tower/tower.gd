@@ -8,14 +8,23 @@ signal merge_level_changed(new_value: int)
 
 #DRAG N DROP
 var is_hovered : bool = false
-var is_dragged : bool = false
+var is_dragged : bool:
+	set(value):
+		is_dragged = value
+		#Activate/Deactivate Attacking
+		if attack_component:
+			attack_component.is_active = !value
 #LOCATING ON THE GRID
 var grid_manager : GridManager
 var original_position: Vector2
 var inventory_ui
 
+#Components
+var attack_component
+
 func _ready() -> void:
-	
+	attack_component = get_node("AttackComponent")
+	is_dragged = false
 	if get_parent() is GridManager:
 		grid_manager = get_parent()
 	else:
@@ -69,7 +78,7 @@ func on_tower_clicked():
 	print("TOWER Clicked")
 
 
-func _on_mouse_entered() -> void:
+func _on_drag_n_drop_area_mouse_entered() -> void:
 	is_hovered = true
-func _on_mouse_exited() -> void:
+func _on_drag_n_drop_area_mouse_exited() -> void:
 	is_hovered = false
