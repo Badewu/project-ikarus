@@ -3,7 +3,7 @@ extends Area2D
 class_name Spawner
 
 var test_enemy_path: String = "res://data/enemies/000 starting zone/sheep.tres"
-var enemy_template = preload("res://entities/enemies/enemy.tscn")
+var enemy_template
 var wanderer_template = preload("res://scenes/Spawner/wanderer.tscn")
 var grid_manager : GridManager
 var original_position : Vector2
@@ -13,6 +13,7 @@ var is_dragged : bool = false
 var is_hovered: bool = false
 
 func _ready() -> void:
+	enemy_template = load("res://entities/enemies/enemy.tscn")
 	grid_manager = get_parent().get_parent()
 	get_node("DragNDropCollision").shape.size = Vector2(grid_manager.grid_size, grid_manager.grid_size)
 

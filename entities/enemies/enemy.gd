@@ -19,7 +19,9 @@ var animated_sprite : AnimatedSprite2D
 var movement : Node2D
 var collision : CollisionShape2D 
 
-func _ready() -> void:
+func _ready():
+	if not data:
+		data = load("res://data/enemies/000 starting zone/sheep.tres")
 	set_animation_frames()
 	set_movement()
 	set_rank()
