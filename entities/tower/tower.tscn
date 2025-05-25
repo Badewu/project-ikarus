@@ -1,63 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://cvexh50lxssni"]
+[gd_scene load_steps=10 format=3 uid="uid://cvexh50lxssni"]
 
 [ext_resource type="Script" uid="uid://cagwqgidenf80" path="res://entities/tower/tower.gd" id="1_mg2hd"]
 [ext_resource type="Script" uid="uid://bmk3mk28en4i6" path="res://data/types/tower_data.gd" id="2_nfofi"]
 [ext_resource type="Texture2D" uid="uid://b5padmoifdgxq" path="res://assets/Placeholder/Tower/Rural Village Nature Objects No Shadows.png" id="2_r21n7"]
-[ext_resource type="Script" uid="uid://ce2qpragxf1al" path="res://data/types/attack modules/attack_module.gd" id="3_5to8e"]
 [ext_resource type="Script" uid="uid://fp0cmvspw53h" path="res://entities/tower/merge_level_label.gd" id="3_cbwxl"]
 [ext_resource type="PackedScene" uid="uid://ttv6ybf8d58q" path="res://entities/tower/attack_component.tscn" id="3_w163v"]
-[ext_resource type="Texture2D" uid="uid://dmj51xu03ebqw" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile023.png" id="4_5muxy"]
-[ext_resource type="Script" uid="uid://bts05ykmnlc31" path="res://data/types/attack modules/area_module.gd" id="4_6o8x2"]
 [ext_resource type="Script" uid="uid://bbaxcgtdvg8m6" path="res://entities/tower/attack_component.gd" id="4_ndkb3"]
-[ext_resource type="Script" uid="uid://je6203d5gvap" path="res://data/types/attack modules/elemental_module.gd" id="5_4ajj5"]
-[ext_resource type="Script" uid="uid://bsisa2iw2emi0" path="res://data/types/attack modules/projectile_module.gd" id="6_5muxy"]
-[ext_resource type="Texture2D" uid="uid://drgh6uxhvi711" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile012.png" id="6_tiqno"]
-[ext_resource type="Texture2D" uid="uid://bsmi7h005s8md" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile018.png" id="8_repvf"]
 
 [sub_resource type="Resource" id="Resource_vec08"]
 script = ExtResource("2_nfofi")
 level = 1
 metadata/_custom_type_script = "uid://bmk3mk28en4i6"
-
-[sub_resource type="Resource" id="Resource_tiqno"]
-script = ExtResource("4_6o8x2")
-radius = 100.0
-attack_speed_modifier = 1.0
-projectile_radius_malus = 0.7
-projectile_damage_malus = 0.6
-module_type = 2
-module_name = "Arianino"
-icon = ExtResource("4_5muxy")
-hidden_level = 1
-quality = 0
-metadata/_custom_type_script = "uid://bts05ykmnlc31"
-
-[sub_resource type="Resource" id="Resource_repvf"]
-script = ExtResource("5_4ajj5")
-element = 0
-initial_damage = 10.0
-dot_damage = 5.0
-dot_duration = 3.0
-effect_strength = 1.0
-module_type = 0
-module_name = "Fire Boy"
-icon = ExtResource("6_tiqno")
-hidden_level = 1
-quality = 0
-metadata/_custom_type_script = "uid://je6203d5gvap"
-
-[sub_resource type="Resource" id="Resource_xjub8"]
-script = ExtResource("6_5muxy")
-damage = 20.0
-range_bonus = 50.0
-projectile_speed = 300.0
-pierce_armor = 0.0
-module_type = 1
-module_name = "Schnipper"
-icon = ExtResource("8_repvf")
-hidden_level = 1
-quality = 0
-metadata/_custom_type_script = "uid://bsisa2iw2emi0"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8wc2c"]
 
@@ -67,7 +20,6 @@ size = Vector2(64, 64)
 [node name="Tower" type="Area2D" groups=["Tower"]]
 script = ExtResource("1_mg2hd")
 data = SubResource("Resource_vec08")
-equipped_modules = Array[ExtResource("3_5to8e")]([SubResource("Resource_tiqno"), SubResource("Resource_repvf"), SubResource("Resource_xjub8")])
 
 [node name="AttackComponent" parent="." instance=ExtResource("3_w163v")]
 script = ExtResource("4_ndkb3")
@@ -126,6 +78,7 @@ text = "X"
 
 [node name="UpgradeModules" type="GridContainer" parent="InventoryUI/VBoxContainer"]
 layout_mode = 2
+columns = 3
 
 [connection signal="merge_level_changed" from="." to="MergeLevelLabel" method="_on_tower_merge_level_changed"]
 [connection signal="mouse_entered" from="DragNDropArea" to="." method="_on_drag_n_drop_area_mouse_entered"]

@@ -13,8 +13,10 @@ var base_element_icon : String = "res://assets/Placeholder/modules/elemental_mod
 func _ready() -> void:
 	custom_minimum_size = Vector2(48, 48)
 	texture_normal = preload("res://icon.svg")
-	modulate = Color(0.5, 0.5, 0.5) #Dark empty slot
-	print("Connection ready? " + str(pressed.is_connected(_on_pressed)))
+	stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	modulate = Color(0, 0, 0) #Dark empty slot
+	if current_module:
+		set_module(current_module)
 
 
 func set_module(module : AttackModule) -> void:
@@ -29,10 +31,10 @@ func set_module(module : AttackModule) -> void:
 			AttackModule.ModuleType.ELEMENTAL:
 				icon = load(base_element_icon)
 		
-		if module.icon:
-			icon = module.icon
+		#if module.icon:
+		#	icon = module.icon
 		
-		texture_normal = module.icon
+		texture_normal = icon
 		modulate = Color.WHITE
 		#Eventually Tooltip text
 	

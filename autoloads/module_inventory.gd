@@ -1,5 +1,9 @@
 extends Node
 
+var base_proj_icon : String = "res://assets/Placeholder/modules/projectile_module.png"
+var base_area_icon : String = "res://assets/Placeholder/modules/area_module.png"
+var base_element_icon : String = "res://assets/Placeholder/modules/elemental_module.png"
+
 var owned_module : Array[AttackModule] = []
 var module_selection_ui : Control
 
@@ -10,6 +14,7 @@ func _ready() -> void:
 func generate_test_modules():
 	var fire_module : AttackModule = ElementalModule.new()
 	fire_module.module_name = "Roaring Inferno"
+	fire_module.module_type = AttackModule.ModuleType.ELEMENTAL
 	fire_module.element = AttackModule.ElementType.FIRE
 	fire_module.hidden_level = 1
 	fire_module.quality = AttackModule.Quality.NORMAL
@@ -18,6 +23,7 @@ func generate_test_modules():
 	
 	var proj_module : AttackModule = ProjectileModule.new()
 	proj_module.module_name = "Sniperino"
+	proj_module.module_type = AttackModule.ModuleType.PROJECTILE
 	proj_module.hidden_level = 1
 	proj_module.quality = AttackModule.Quality.RARE
 	proj_module.generate_stats()
@@ -25,6 +31,7 @@ func generate_test_modules():
 	
 	var area_module : AttackModule = AreaModule.new()
 	area_module.module_name = "Beefy Bumper"
+	area_module.module_type = AttackModule.ModuleType.AREA
 	area_module.hidden_level = 1
 	area_module.quality = AttackModule.Quality.NORMAL
 	area_module.generate_stats()
@@ -100,7 +107,17 @@ func create_module_button(module : AttackModule, target_slot : TextureButton) ->
 	
 	var icon = TextureRect.new()
 	icon.custom_minimum_size = Vector2(64, 64)
-	icon.texture = module.icon if module.icon else preload("res://icon.svg")
+	if module.icon:
+		icon.texture = module.icon
+	else:
+		match module.module_type:
+			AttackModule.ModuleType.PROJECTILE:
+				icon.texture = load(base_proj_icon)
+			AttackModule.ModuleType.AREA:
+				icon.texture = load(base_area_icon)
+			AttackModule.ModuleType.ELEMENTAL:
+				icon.texture = load(base_element_icon)
+	
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	hbox.add_child(icon)
 	
