@@ -200,6 +200,7 @@ func try_merge_tower(tower1: Tower, tower2: Tower):
 		tower1.merge_level += 1
 		tower1.original_position = tower2.original_position
 		tower1.emit_signal("merge_level_changed", tower1.merge_level)
+		tower1.update_module_slots()
 		print("Tower Merge Level Is Now " + str(tower1.merge_level))
 		tower2.queue_free()
 		generate_flow_field(flow_goal)

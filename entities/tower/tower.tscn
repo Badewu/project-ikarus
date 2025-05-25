@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cvexh50lxssni"]
+[gd_scene load_steps=20 format=3 uid="uid://cvexh50lxssni"]
 
 [ext_resource type="Script" uid="uid://cagwqgidenf80" path="res://entities/tower/tower.gd" id="1_mg2hd"]
 [ext_resource type="Script" uid="uid://bmk3mk28en4i6" path="res://data/types/tower_data.gd" id="2_nfofi"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://je6203d5gvap" path="res://data/types/attack modules/elemental_module.gd" id="5_4ajj5"]
 [ext_resource type="Script" uid="uid://bsisa2iw2emi0" path="res://data/types/attack modules/projectile_module.gd" id="6_5muxy"]
 [ext_resource type="Texture2D" uid="uid://drgh6uxhvi711" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile012.png" id="6_tiqno"]
-[ext_resource type="PackedScene" uid="uid://w1f8inrujic2" path="res://entities/tower/UI/tower_module_slot.tscn" id="7_ndkb3"]
 [ext_resource type="Texture2D" uid="uid://bsmi7h005s8md" path="res://assets/Placeholder/enemies/000 starting zone/sheep/die/tile018.png" id="8_repvf"]
 
 [sub_resource type="Resource" id="Resource_vec08"]
@@ -95,6 +94,7 @@ offset_bottom = 12.0
 script = ExtResource("3_cbwxl")
 
 [node name="InventoryUI" type="PanelContainer" parent="."]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -113,22 +113,21 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Name" type="Label" parent="InventoryUI/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="InventoryUI/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Level 1"
 
+[node name="Close" type="Button" parent="InventoryUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "X"
+
 [node name="UpgradeModules" type="GridContainer" parent="InventoryUI/VBoxContainer"]
-layout_mode = 2
-
-[node name="TowerModulSlot" parent="InventoryUI/VBoxContainer/UpgradeModules" instance=ExtResource("7_ndkb3")]
-layout_mode = 2
-
-[node name="TowerModulSlot2" parent="InventoryUI/VBoxContainer/UpgradeModules" instance=ExtResource("7_ndkb3")]
-layout_mode = 2
-
-[node name="TowerModulSlot3" parent="InventoryUI/VBoxContainer/UpgradeModules" instance=ExtResource("7_ndkb3")]
 layout_mode = 2
 
 [connection signal="merge_level_changed" from="." to="MergeLevelLabel" method="_on_tower_merge_level_changed"]
 [connection signal="mouse_entered" from="DragNDropArea" to="." method="_on_drag_n_drop_area_mouse_entered"]
 [connection signal="mouse_exited" from="DragNDropArea" to="." method="_on_drag_n_drop_area_mouse_exited"]
+[connection signal="pressed" from="InventoryUI/VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]

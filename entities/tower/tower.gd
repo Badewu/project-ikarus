@@ -7,6 +7,7 @@ signal merge_level_changed(new_value: int)
 @export var merge_level : int = 3
 
 #DRAG N DROP/Input
+var is_ui_open : bool = false
 var is_hovered : bool = false
 var is_dragged : bool = false:
 	set(value):
@@ -93,6 +94,10 @@ func update_module_slots() -> void:
 	
 	if inventory_ui:
 		update_module_ui()
+	if is_ui_open:
+		inventory_ui.show()
+	else:
+		inventory_ui.hide()
 
 
 func update_module_ui() -> void:
@@ -104,7 +109,7 @@ func update_module_ui() -> void:
 	
 	# Create new slots
 	for i in module_slots:
-		var slot = preload("res://entities/tower/UI/tower_modul_slot.tscn").instantiate()
+		var slot = preload("res://entities/tower/UI/tower_module_slot.tscn").instantiate()
 		slot.slot_index = i
 		slot.tower = self
 		slot.custom_minimum_size = Vector2(48, 48)
@@ -118,7 +123,6 @@ func update_module_ui() -> void:
 func _input(event: InputEvent) -> void:
 	# DRAG AND DROP WITH CLICK DETECTION
 	if event is InputEventMouseButton and event.pressed:
-		update_module_slots()
 		if event.button_index == MOUSE_BUTTON_LEFT and is_hovered:
 			# Store initial press position for drag detection
 			mouse_down_pos = get_global_mouse_position()
@@ -145,10 +149,15 @@ func _input(event: InputEvent) -> void:
 
 
 func on_tower_clicked():
-	update_module_slots()
+	if not is_ui_open and is_hovered:
+		is_ui_open = true
+		update_module_slots()
 
 
 func _on_drag_n_drop_area_mouse_entered() -> void:
 	is_hovered = true
 func _on_drag_n_drop_area_mouse_exited() -> void:
 	is_hovered = false
+func _on_close_pressed() -> void:
+	inventory_ui.hide()
+	is_ui_open = false
