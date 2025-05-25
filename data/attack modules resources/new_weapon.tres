@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RangedNormalModule" load_steps=2 format=3 uid="uid://bnfwek6nu27e6"]
 
-[ext_resource type="Script" uid="uid://bsisa2iw2emi0" path="res://data/types/attack modules/ranged_normal_module.gd" id="1_haqih"]
+[ext_resource type="Script" uid="uid://bsisa2iw2emi0" path="res://data/types/attack modules/projectile_module.gd" id="1_haqih"]
 
 [resource]
 script = ExtResource("1_haqih")

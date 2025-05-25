@@ -66,7 +66,7 @@ func calculate_health_from_data() -> float:
 	return health
 
 
-func apply_damage(amount : float):
+func apply_damage_event(amount : float):
 	current_health -= amount
 	
 	#Visual feedback
