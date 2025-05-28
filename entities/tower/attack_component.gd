@@ -20,13 +20,6 @@ func _ready() -> void:
 	current_range = attack_range
 	current_attack_speed = attack_speed
 	update_range_collision()
-	
-	#Setup RangeCollision of Tower
-	var tower : Tower = get_parent()
-	if tower and tower.has_node("RangeCollision"):
-		var collision_shape = tower.get_node("RangeCollision")
-		collision_shape.shape.radius = attack_range
-	print(attack_range)
 
 
 func _process(delta: float) -> void:
@@ -87,21 +80,50 @@ func find_new_target() -> void:
 func create_projectile(target : Enemy) -> void:
 	
 	if attack_data.get("has_projectile", false):
-		var projectile = create_projectile_instance(target)
+		create_projectile_instance(target)
 	elif attack_data.get("is_area_standalone", false):
 		apply_area_damage()
 	else:
-		apply_direct_damage(target) #I think I might want to remove this
-									#because no Projectile/Area -> no Damage
+		pass
 
 
 
 
-func create_projectile_instance(target : Enemy) -> Node2D:
-	#Implement actual projectile later
+func create_projectile_instance(target : Enemy) -> void:
+	# Load projectile scene
+	var projectile_scene = preload("res://entities/projectiles/projectile.tscn")
+	var projectile = projectile_scene.instantiate() as Projectile
 	
-	apply_direct_damage(target) # Placeholder
-	return null
+	# Set projectile properties
+	projectile.speed = attack_data.get("projectile_speed", 300.0)
+	projectile.damage = current_damage
+	projectile.max_distance = current_range * 1.5  # Safety margin
+	
+	# Create damage event with module data
+	var damage_event = DamageEvent.new()
+	damage_event.base_damage = current_damage
+	damage_event.element = attack_data.get("element", ElementSet.ElementType.FIRE)
+	damage_event.proficiency = 1.0
+	damage_event.dot_damage = attack_data.get("dot_damage", 0)
+	damage_event.dot_duration = attack_data.get("dot_duration", 0)
+	projectile.damage_event = damage_event
+	
+	# Set visual properties based on element
+	match damage_event.element:
+		ElementSet.ElementType.FIRE:
+			projectile.projectile_color = Color.ORANGE_RED
+		ElementSet.ElementType.WATER:
+			projectile.projectile_color = Color.DEEP_SKY_BLUE
+		ElementSet.ElementType.EARTH:
+			projectile.projectile_color = Color.SADDLE_BROWN
+		ElementSet.ElementType.AIR:
+			projectile.projectile_color = Color.LIGHT_CYAN
+		ElementSet.ElementType.ETHER:
+			projectile.projectile_color = Color.MEDIUM_PURPLE
+	
+	# Add to scene and set target
+	get_tree().current_scene.add_child(projectile)
+	projectile.set_target(target, global_position)
 
 
 func apply_area_damage() -> void:
@@ -153,4 +175,4 @@ func apply_direct_damage(target : Enemy) -> void:
 	damage_event.element = attack_data.get("element", ElementSet.ElementType.FIRE)
 	damage_event.proficiency = 1.0 #Proof of concept modifier
 	
-	target.apply_damage_event(base_damage)
+	target.apply_damage_event(damage_event)

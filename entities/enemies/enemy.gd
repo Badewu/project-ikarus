@@ -3,6 +3,8 @@ class_name Enemy
 
 enum State {IDLE, MOVING, ATTACKING, DEAD}
 
+signal health_changed(value)
+
 @export var data: EnemyData
 
 #Live Data
@@ -55,6 +57,10 @@ func _process(delta: float) -> void:
 
 func set_stats() -> void:
 	max_health = calculate_health_from_data()
+	var health_bar : ProgressBar = get_node("Healthbar")
+	health_bar.max_value = max_health
+	health_bar.position.x = -24
+	health_bar.position.y = -24
 	current_health = max_health
 
 
@@ -66,14 +72,54 @@ func calculate_health_from_data() -> float:
 	return health
 
 
-func apply_damage_event(amount : float):
-	current_health -= amount
+func apply_damage(amount: float) -> void:
+	# Legacy function - converts to damage event
+	var damage_event = DamageEvent.new()
+	damage_event.base_damage = amount
+	damage_event.element = ElementSet.ElementType.FIRE  # Default element
+	damage_event.proficiency = 1.0
+	apply_damage_event(damage_event)
+
+
+func apply_damage_event(damage_event: DamageEvent) -> void:
+	# Calculate actual damage based on resistances
+	var actual_damage = damage_event.base_damage
 	
-	#Visual feedback
-	modulate = Color.RED
+	# Apply elemental resistance if we have data
+	if data and data.resistances:
+		var resistance = data.resistances.get_element_modifier(damage_event.element)
+		actual_damage *= resistance
+	
+	# Apply proficiency modifier
+	actual_damage *= damage_event.proficiency
+	
+	# Apply base damage
+	current_health -= actual_damage
+	
+	# Visual feedback with element color
+	var hit_color = Color.WHITE
+	match damage_event.element:
+		ElementSet.ElementType.FIRE:
+			hit_color = Color.ORANGE_RED
+			# TODO: Apply fire DoT
+		ElementSet.ElementType.WATER:
+			hit_color = Color.DEEP_SKY_BLUE
+			# TODO: Chain damage
+		ElementSet.ElementType.EARTH:
+			hit_color = Color.SADDLE_BROWN
+			# TODO: Apply stun
+		ElementSet.ElementType.AIR:
+			hit_color = Color.LIGHT_CYAN
+			# TODO: Apply slow
+		ElementSet.ElementType.ETHER:
+			hit_color = Color.MEDIUM_PURPLE
+	
+	# Flash effect
+	modulate = hit_color
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color.WHITE
 	
+	# Check death
 	if current_health <= 0:
 		current_state = State.DEAD
 

@@ -18,6 +18,8 @@ metadata/_custom_type_script = "uid://bmk3mk28en4i6"
 size = Vector2(64, 64)
 
 [node name="Tower" type="Area2D" groups=["Tower"]]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_mg2hd")
 data = SubResource("Resource_vec08")
 
