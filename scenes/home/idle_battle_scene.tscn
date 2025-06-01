@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3sy80gyp5vce"]
 
-[ext_resource type="Script" uid="uid://5k4xwlukrdwt" path="res://scenes/home/idle_battle_scene.gd" id="1_k0ssi"]
+[ext_resource type="Script" path="res://scenes/home/idle_battle_scene.gd" id="1_k0ssi"]
 [ext_resource type="PackedScene" uid="uid://c2g6xc4rlc2jo" path="res://core/camera/main_camera.tscn" id="3_rro0y"]
 [ext_resource type="PackedScene" uid="uid://1wbv33vd5l6x" path="res://scenes/Spawner/spawner.tscn" id="3_uw4sf"]
-[ext_resource type="Script" uid="uid://28vhrllm3313" path="res://scenes/home/grid_manager.gd" id="4_uw4sf"]
+[ext_resource type="Script" path="res://scenes/home/grid_manager.gd" id="4_uw4sf"]
 
 [sub_resource type="TileSet" id="TileSet_rro0y"]
 tile_size = Vector2i(64, 64)
