@@ -17,7 +17,7 @@ llm_api="ollama_api"
 
 config/name="Project Ikarus"
 run/main_scene="res://scenes/home/idle_battle_scene.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]

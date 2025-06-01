@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://cvexh50lxssni"]
 
-[ext_resource type="Script" path="res://entities/tower/tower.gd" id="1_mg2hd"]
-[ext_resource type="Script" path="res://data/types/tower_data.gd" id="2_nfofi"]
+[ext_resource type="Script" uid="uid://cagwqgidenf80" path="res://entities/tower/tower.gd" id="1_mg2hd"]
+[ext_resource type="Script" uid="uid://bmk3mk28en4i6" path="res://data/types/tower_data.gd" id="2_nfofi"]
 [ext_resource type="Texture2D" uid="uid://b5padmoifdgxq" path="res://assets/Placeholder/Tower/Rural Village Nature Objects No Shadows.png" id="2_r21n7"]
-[ext_resource type="Script" path="res://entities/tower/merge_level_label.gd" id="3_cbwxl"]
+[ext_resource type="Script" uid="uid://fp0cmvspw53h" path="res://entities/tower/merge_level_label.gd" id="3_cbwxl"]
 [ext_resource type="PackedScene" uid="uid://ttv6ybf8d58q" path="res://entities/tower/attack_component.tscn" id="3_w163v"]
-[ext_resource type="Script" path="res://entities/tower/attack_component.gd" id="4_ndkb3"]
+[ext_resource type="Script" uid="uid://bbaxcgtdvg8m6" path="res://entities/tower/attack_component.gd" id="4_ndkb3"]
 
 [sub_resource type="Resource" id="Resource_vec08"]
 script = ExtResource("2_nfofi")

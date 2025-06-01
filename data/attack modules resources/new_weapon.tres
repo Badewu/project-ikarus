@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="RangedNormalModule" load_steps=2 format=3 uid="uid://bnfwek6nu27e6"]
+[gd_resource type="Resource" script_class="ProjectileModule" load_steps=2 format=3 uid="uid://bnfwek6nu27e6"]
 
 [ext_resource type="Script" uid="uid://bsisa2iw2emi0" path="res://data/types/attack modules/projectile_module.gd" id="1_haqih"]
 
 [resource]
 script = ExtResource("1_haqih")
-speed = 300.0
-module_type = "projectile"
+damage = 20.0
+range_bonus = 50.0
+projectile_speed = 300.0
+pierce_armor = 0.0
+module_type = 0
+module_name = "Basic Module"
+hidden_level = 1
+quality = 0
 metadata/_custom_type_script = "uid://bsisa2iw2emi0"

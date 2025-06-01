@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://o78tfoxi27wp"]
 
-[ext_resource type="Script" path="res://entities/enemies/enemy.gd" id="1_owq46"]
+[ext_resource type="Script" uid="uid://cgtjbpyepdb0l" path="res://entities/enemies/enemy.gd" id="1_owq46"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8edke"]
 animations = [{
